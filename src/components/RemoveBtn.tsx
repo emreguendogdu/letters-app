@@ -22,7 +22,7 @@ export default function RemoveBtn({ id }: { id: string }) {
   return (
     <Button
       onClick={removeLetter}
-      className="!bg-white !text-red-500 !px-0 !py-0"
+      className="!bg-white !text-red-500 !px-0 !py-0 !border-0"
     >
       <HiOutlineTrash size={24} />
     </Button>

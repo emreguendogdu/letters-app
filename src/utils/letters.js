@@ -33,3 +33,11 @@ export const getLetterById = async (id) => {
     console.log("Error getting single letter: ", err)
   }
 }
+
+export const convertDate = (date) => {
+  return (date = new Date(date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }))
+}
