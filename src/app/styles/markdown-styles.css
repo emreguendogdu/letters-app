@@ -1,0 +1,28 @@
+.markdown {
+  width: 100%;
+  --font-family-heading: "Inter", sans-serif;
+}
+
+.markdown h1 {
+  font-size: 1.6rem;
+  margin-bottom: 1.25rem;
+  font-weight: bold;
+}
+
+.markdown h3 {
+  font-size: 1.6rem;
+  letter-spacing: -0.02rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
+}
+
+.markdown p,
+.markdown ul,
+.markdown blockquote {
+  line-height: 1.625;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+  font-size: 1.1rem;
+  letter-spacing: -0.01rem;
+  font-weight: 300;
+}

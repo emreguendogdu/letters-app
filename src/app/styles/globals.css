@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --letter-bg: #181818;
+  --letter-h1-fontweight: 700;
+  --letter-p-fontweight: 200;
+}
+
+* {
+  box-sizing: border-box;
+}
