@@ -1,13 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import RemoveAllBtn from "./RemoveAllBtn"
+import RemoveAllBtn from "./forms/RemoveAllBtn"
 import { usePathname } from "next/navigation"
-import Button from "./Button"
+import Button from "./forms/Button"
 
 const LettersAppLink = () => {
   return (
-    <Link href={"/"} className="text-white font-bold">
+    <Link href={"/"} className="font-bold font-mono">
       Letters App
     </Link>
   )
@@ -26,9 +26,9 @@ const lettersPageNavItems = () => {
   return (
     <div className="flex gap-2">
       <Button>
-        <Link href={"/addLetter"}>Add Letter</Link>
+        <Link href={"/addLetter"}>New Letter</Link>
       </Button>
-      <RemoveAllBtn />
+      {/* <RemoveAllBtn /> */}
     </div>
   )
 }

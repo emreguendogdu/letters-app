@@ -27,10 +27,10 @@ export const getLetterById = async (id) => {
         "Content-Type": "application/json",
       },
     })
-    if (!res.ok) throw new Error("Error getting single letter: ")
+    if (!res.ok) throw new Error("Error getting letter: ")
     return res.json()
   } catch (err) {
-    console.log("Error getting single letter: ", err)
+    console.log("Error getting letter: ", err)
   }
 }
 

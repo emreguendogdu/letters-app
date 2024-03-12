@@ -1,4 +1,4 @@
-import HandlePreview from "./HandlePreview"
+import HandlePreview from "../MarkdownPreview"
 import Button from "./Button"
 
 type InputProps = {
@@ -39,7 +39,7 @@ export function LetterTextArea({ name, value, onChange }: InputProps) {
   return (
     <>
       <label htmlFor={name}>Letter (use markdown)</label>
-      <div className="flex *:flex-1 gap-4">
+      <div className="flex *:flex-1 gap-4 max-[768px]:flex-col">
         <textarea
           id={name}
           name={name}

@@ -6,7 +6,7 @@ export default async function LettersList() {
 
   return (
     <>
-      <div className="flex flex-wrap box-border">
+      <div className="flex flex-wrap box-border flex-row-reverse max-[768px]:flex-col-reverse">
         {letters.length > 0
           ? letters?.map((letter: any) => {
               return (

@@ -5,7 +5,7 @@ import MarkdownItAttrs from "markdown-it-attrs"
 import { useEffect } from "react"
 import "@/app/styles/markdown-styles.css"
 
-export default function HandlePreview({ letter }: { letter: string }) {
+export default function MarkdownPreview({ letter }: { letter: string }) {
   useEffect(() => {
     const md = new MarkdownIt()
     md.use(MarkdownItAttrs)

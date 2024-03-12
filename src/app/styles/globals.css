@@ -1,11 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-:root {
-  --letter-bg: #181818;
-  --letter-h1-fontweight: 700;
-  --letter-p-fontweight: 200;
+@font-face {
+  font-family: "Helvetica Now";
+  src: url("/fonts/helvetica-now/helveticanowtext-black-demo.ttf") format("ttf"),
+    format("truetype");
 }
 
 * {

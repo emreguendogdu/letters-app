@@ -1,4 +1,4 @@
-import EditLetterForm from "@/components/EditLetterForm"
+import EditLetterForm from "@/components/forms/EditLetterForm"
 import { getLetterById } from "@/utils/letters"
 
 // export const generateStaticParams = async () => {
@@ -8,8 +8,6 @@ import { getLetterById } from "@/utils/letters"
 //     id: letter._id,
 //   }))
 // }
-
-
 
 export default async function EditLetter({ params: { id } }: any) {
   const {

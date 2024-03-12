@@ -1,6 +1,6 @@
 "use client"
 import { fetchLettersPath } from "@/utils/letters"
-import { handleSuccess } from "./handleSuccess"
+import { handleSuccess } from "../handleSuccess"
 import { useRouter } from "next/navigation"
 import Button from "./Button"
 

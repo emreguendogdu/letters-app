@@ -3,7 +3,7 @@
 import { fetchLettersPath } from "@/utils/letters"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { handleSuccess } from "./handleSuccess"
+import { handleSuccess } from "../handleSuccess"
 import { Form, Input, LetterTextArea } from "./Form"
 import Button from "./Button"
 

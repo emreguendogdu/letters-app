@@ -6,7 +6,6 @@ export async function PUT(req, { params }) {
   const { title, description, letter } = await req.json()
   await connectMongoDB()
   await Letter.findByIdAndUpdate(id, { title, description, letter })
-  console.log(title, description, letter)
   return NextResponse.json({ message: "Letter updated" }, { status: 200 })
 }
 

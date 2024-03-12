@@ -1,6 +1,6 @@
 "use client"
-import Button from "@/components/Button"
-import { Form, Input, LetterTextArea } from "@/components/Form"
+import Button from "@/components/forms/Button"
+import { Form, Input, LetterTextArea } from "@/components/forms/Form"
 import { handleSuccess } from "@/components/handleSuccess"
 import { fetchLettersPath } from "@/utils/letters"
 import { useRouter } from "next/navigation"

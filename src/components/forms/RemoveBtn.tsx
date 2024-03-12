@@ -1,7 +1,7 @@
 "use client"
 import { HiOutlineTrash } from "react-icons/hi"
 import { useRouter } from "next/navigation"
-import { handleSuccess } from "./handleSuccess"
+import { handleSuccess } from "../handleSuccess"
 import { fetchLettersPath } from "@/utils/letters"
 import Button from "./Button"
 
