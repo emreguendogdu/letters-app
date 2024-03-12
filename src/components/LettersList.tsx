@@ -2,11 +2,14 @@ import { LetterPreview } from "./LetterPreview"
 import { getLetters } from "@/utils/letters"
 
 export default async function LettersList() {
-  const { letters } = await getLetters()
+  let { letters } = await getLetters()
+
+  // reverse the letters so the latest letter is on top
+  letters = letters?.reverse()
 
   return (
     <>
-      <div className="flex flex-wrap box-border flex-row-reverse max-[768px]:flex-col-reverse">
+      <div className="flex flex-wrap box-border max-[768px]:flex-col">
         {letters.length > 0
           ? letters?.map((letter: any) => {
               return (
@@ -19,7 +22,7 @@ export default async function LettersList() {
                 />
               )
             })
-          : "There are no letters yet..."}
+          : "No letters yet, create one by clicking New Letter button above."}
       </div>
     </>
   )

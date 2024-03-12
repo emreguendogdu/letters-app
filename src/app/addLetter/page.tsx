@@ -52,7 +52,7 @@ export default function AddLetter() {
         value={letter}
         onChange={(e) => setLetter(e.target.value)}
       />
-      <label htmlFor="image">Add image</label>
+      {/* <label htmlFor="image">Add image</label> */}
       <Button>Add Letter</Button>
     </Form>
   )
