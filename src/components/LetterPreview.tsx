@@ -22,14 +22,12 @@ export const LetterPreview = ({
     <article className="pr-4 my-10 flex flex-col justify-between gap-2 items-start w-1/3 max-[768px]:p-0 max-[768px]:w-full max-[768px]:my-5">
       <div className="flex flex-col gap-2">
         <div>
-          <h2 className="font-extrabold text-2xl">
+          <h2 className="font-extrabold text-2xl  bg-gradient-to-b from-black to-blue-300 bg-clip-text text-transparent">
             <Link href={`/letters/${_id}`}>{title}</Link>
           </h2>
         </div>
         <div className="min-h-16">
-          <p className="text-lg bg-gradient-to-b from-black to-gray-300 bg-clip-text text-transparent">
-            {description}
-          </p>
+          <p className="text-lg">{description}</p>
         </div>
         <div>
           <Link href={`/letters/${_id}`} className="italic underline">
