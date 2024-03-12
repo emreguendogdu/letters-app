@@ -13,9 +13,12 @@ const LettersAppLink = () => {
   )
 }
 
+const navClasses =
+  "flex justify-between items-center px-8 py-3 bg-nav-img text-white"
+
 const Nav = ({ children, readLetter = false }: any) => {
   return (
-    <nav className="flex justify-between items-center px-8 py-3 bg-black text-white">
+    <nav className={navClasses}>
       <LettersAppLink />
       {children}
     </nav>
@@ -51,7 +54,7 @@ const editLetterNavItems = (id: string) => {
 
 const readLetterNav = (id: string) => {
   return (
-    <nav className="flex justify-between items-center max-w-3xl mx-auto px-8 py-3 bg-black text-white">
+    <nav className={`${navClasses} max-w-3xl mx-auto`}>
       <LettersAppLink />
       <Button>
         <Link href={`/editLetter/${id}`}>Edit</Link>
