@@ -9,7 +9,7 @@ export default function Letter({ letter }: any) {
         <div id="links"></div>
         <div className="mb-4 mt-2 font-light flex gap-2">
           <time>{convertDate(letter.createdAt)}</time>
-          <span className="border-l border-white" />
+          <span className={`border-l border-black`} />
           <span>Osman Gundogdu</span>
         </div>
         <div>
