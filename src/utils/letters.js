@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic"
+
 export const fetchLettersPath = `${process.env.NEXT_PUBLIC_URL}/api/letters`
 
 export const getLetters = async () => {
