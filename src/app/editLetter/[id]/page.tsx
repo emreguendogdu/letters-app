@@ -1,16 +1,18 @@
+"use client"
 import EditLetterForm from "@/components/forms/EditLetterForm"
-import { getLetterById } from "@/utils/letters"
+import useLetter from "@/hooks/useLetter"
 
-export default async function EditLetter({ params: { id } }: any) {
-  const {
-    letter: { title, description, letter },
-  } = await getLetterById(id)
+export default function EditLetter({ params: { id } }: any) {
+  const { letter, isLoading, isError } = useLetter({ id })
+  if (isLoading) return <></>
+  if (isError) return <div>Error loading letter</div>
+  const { title, description, letter: letterMessage } = letter
   return (
     <EditLetterForm
       id={id}
       title={title}
       description={description}
-      letter={letter}
+      letter={letterMessage}
     />
   )
 }

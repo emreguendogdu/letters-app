@@ -1,9 +1,12 @@
+"use client"
 import { redirect } from "next/navigation"
-import { getLetterById } from "@/utils/letters"
-
+import useLetter from "@/hooks/useLetter"
 import Letter from "@/components/Letter"
 
-export default async function page({ params: { id } }) {
-  const { letter } = (await getLetterById(id)) || redirect("/letters")
+export default function LetterPage({ params: { id } }) {
+  const { letter, isLoading, isError } = useLetter({ id })
+  if (isLoading) return <></>
+  if (isError) return <div>Error loading letter</div>
+
   return <Letter letter={letter} />
 }
