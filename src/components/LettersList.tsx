@@ -1,21 +1,12 @@
 "use client"
-
+import useLetters from "@/hooks/useLetters"
 import { LetterPreview } from "./LetterPreview"
-import { getLetters } from "@/utils/letters"
-import useSWR from "swr"
-
-const fetcher = (...args: [string, RequestInit?]) =>
-  fetch(...args).then((res) => res.json())
 
 export default function LettersList() {
-  const { data, error, isLoading } = useSWR(`/api/letters`, fetcher)
-  let letters = data?.letters
-
-  // reverse the letters so the latest letter is on top
-  letters = letters?.reverse()
-
+  let { letters, isError, isLoading } = useLetters()
+  
   if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error loading letters</div>
+  if (isError) return <div>Error loading letters</div>
   if (letters?.length < 1) return <div>No letters yet.</div>
 
   return (

@@ -5,13 +5,13 @@ import { NextResponse } from "next/server"
 export async function POST(req) {
   const { title, description, letter } = await req.json()
   await connectMongoDB()
-  await Letter.create({title, description, letter})
+  await Letter.create({ title, description, letter })
   return NextResponse.json({ message: "Letter created", status: 201 })
 }
 
 export async function GET() {
   await connectMongoDB()
-  const letters = await Letter.find()
+  const letters = await Letter.find().sort({ createdAt: -1 }).exec()
   return NextResponse.json({ letters })
 }
 
