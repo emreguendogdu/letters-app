@@ -1,5 +1,4 @@
 "use client"
-import { redirect } from "next/navigation"
 import useLetter from "@/hooks/useLetter"
 import Letter from "@/components/Letter"
 

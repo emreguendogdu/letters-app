@@ -45,3 +45,22 @@ export const LetterPreview = ({
     </article>
   )
 }
+
+export const LetterSkeleton = () => {
+  return (
+    <article className="pr-4 my-10 flex flex-col justify-between gap-2 items-start w-1/3 max-[768px]:p-0 max-[768px]:w-full max-[768px]:my-5">
+      <div className="flex flex-col gap-2">
+        <div>
+          <h2 className="font-extrabold text-2xl  bg-gradient-to-b from-black to-blue-300 bg-clip-text text-transparent skeleton skeleton-text">
+            {" "}
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi,
+            voluptates!
+          </h2>
+        </div>
+        <div className="min-h-16">
+          <p className="text-lg skeleton skeleton-text"></p>
+        </div>
+      </div>
+    </article>
+  )
+}
