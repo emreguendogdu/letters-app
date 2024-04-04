@@ -14,7 +14,7 @@ const LettersAppLink = () => {
 }
 
 const navClasses =
-  "flex justify-between items-center px-8 py-3 max-[768px]:px-3 bg-nav-img text-white"
+  "fixed top-0 left-0 right-0 mx-2 my-1 px-8 py-3  flex justify-between items-center max-[768px]:px-3 bg-nav-img text-white z-10"
 
 const Nav = ({ children, readLetter = false }: any) => {
   return (

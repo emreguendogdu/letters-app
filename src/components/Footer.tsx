@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 py-2 px-4 text-center">
+    <footer className="w-full py-2 px-4 text-center bg-black text-white">
       <p className="text-xs">
         <a
           className="font-bold"

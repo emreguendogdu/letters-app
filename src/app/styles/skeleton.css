@@ -4,7 +4,7 @@
   color: transparent;
   background: transparent;
   border-radius: 0.125rem;
-  width: 80%;
+  width: 100%;
 }
 
 .skeleton-title {
@@ -29,5 +29,14 @@
 
   100% {
     background-color: hsl(200, 20%, 95%);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .skeleton-title {
+    height: 3rem;
+  }
+  .skeleton-text {
+    height: 1rem;
   }
 }
