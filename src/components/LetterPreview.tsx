@@ -58,9 +58,17 @@ export const LetterSkeleton = () => {
           </h2>
         </div>
         <div className="min-h-16">
-          <p className="text-lg skeleton skeleton-text"></p>
-          <p className="text-lg skeleton skeleton-text"></p>
-          <p className="text-lg skeleton skeleton-text"></p>
+          <p className="skeleton skeleton-text" />
+          <p className="skeleton skeleton-text" />
+          <p className="skeleton skeleton-text" />
+        </div>
+        <div>
+          <p className="max-w-20 mt-6 skeleton skeleton-text" />
+          <p className="max-w-16 mt-2 skeleton skeleton-text" />
+          <div className="flex gap-2">
+            <p className="max-w-6 min-h-6 mt-2 skeleton skeleton-text" />
+            <p className="max-w-6 min-h-6 mt-2 skeleton skeleton-text" />
+          </div>
         </div>
       </div>
     </article>
