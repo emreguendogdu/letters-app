@@ -5,7 +5,7 @@ import "@/apP/styles/skeleton.css"
 
 export const SkeletonLetter = () => {
   return (
-    <article className="mb-4 mt-10 max-w-3xl min-h-96 container ml-auto mr-auto break-words">
+    <article className="mb-4 mt-10 max-w-3xl min-h-screen container ml-auto mr-auto break-words">
       <div className="mb-6 mt-2 flex gap-2 flex-col">
         <div id="links"></div>
         <div className="mb-4 mt-2 font-light flex gap-2 *:flex-1">
@@ -35,7 +35,7 @@ export const SkeletonLetter = () => {
 
 export default function Letter({ letter }: any) {
   return (
-    <article className="mb-4 mt-10 max-w-3xl min-h-96 container ml-auto mr-auto break-words">
+    <article className="mb-4 mt-14 max-w-3xl container ml-auto mr-auto break-words min-h-screen">
       <div className="mb-6 mt-2 flex gap-2 flex-col">
         <div id="links"></div>
         <div className="mb-4 mt-2 font-light flex gap-2">
