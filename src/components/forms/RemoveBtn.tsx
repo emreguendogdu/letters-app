@@ -1,6 +1,5 @@
 import { HiOutlineTrash } from "react-icons/hi"
 import { useRouter } from "next/navigation"
-import { fetchLettersPath } from "@/utils/utils"
 
 export default function RemoveBtn({
   id,
@@ -13,8 +12,8 @@ export default function RemoveBtn({
   const actionText = removeAll ? "all letters" : "this letter"
 
   const removePath = removeAll
-    ? fetchLettersPath
-    : `${fetchLettersPath}?id=${id}`
+    ? "/api/letters"
+    : `/api/letters?id=${id}`
 
   const removeLetter = async () => {
     const confirmed = confirm(`Are you sure you want to delete ${actionText}?`)

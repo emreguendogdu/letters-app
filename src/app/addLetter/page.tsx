@@ -2,7 +2,6 @@
 
 import { Form, Input, LetterTextArea } from "@/components/forms/Form"
 import { useHandleSuccess } from "@/hooks/useHandleSuccess"
-import { fetchLettersPath } from "@/utils/utils"
 import { useState } from "react"
 
 export default function AddLetter() {
@@ -14,7 +13,7 @@ export default function AddLetter() {
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     try {
-      const res = await fetch(fetchLettersPath, {
+      const res = await fetch("/api/letters", {
         method: "POST",
         mode: "no-cors",
         headers: {

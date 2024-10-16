@@ -1,6 +1,5 @@
 "use client"
 
-import { fetchLettersPath } from "@/utils/utils"
 import { useState } from "react"
 import { Form, Input, LetterTextArea } from "./Form"
 import { useHandleSuccess } from "@/hooks/useHandleSuccess"
@@ -26,7 +25,7 @@ export default function EditLetterForm({
   const handleSubmit = async (e: any) => {
     e.preventDefault()
     try {
-      const res = await fetch(`${fetchLettersPath}/${id}`, {
+      const res = await fetch(`/api/letters/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

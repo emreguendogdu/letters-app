@@ -1,18 +1,45 @@
 import mongoose from "mongoose"
 
-let isConnected = false
+const MONGODB_URI = process.env.MONGO_URI
+
+// Global connection object
+const connection = {
+  isConnected: false,
+  conn: null,
+  promise: null,
+}
 
 const connectMongoDB = async () => {
-  if (isConnected) {
-    return console.log("Using existing MongoDB connection")
+  // If already connected, reuse the connection
+  if (connection.isConnected) {
+    return connection.conn
+  }
+
+  // If connecting, wait for the existing promise
+  if (connection.promise) {
+    connection.conn = await connection.promise
+    return connection.conn
   }
 
   try {
-    const connection = await mongoose.connect(process.env.MONGO_URI)
-    isConnected = connection.connections[0].readyState // Track connection state
-    console.log("Connected to MongoDB successfully")
+    // Configure connection options for better performance
+    const opts = {
+      bufferCommands: false,
+      maxPoolSize: 10,
+      minPoolSize: 5,
+      socketTimeoutMS: 45000,
+      serverSelectionTimeoutMS: 5000,
+      family: 4, // Use IPv4, skip IPv6
+    }
+
+    // Create new connection
+    connection.promise = mongoose.connect(process.env.MONGO_URI, opts)
+    connection.conn = await connection.promise
+    connection.isConnected = connection.conn.connections[0].readyState === 1
+
+    return connection.conn
   } catch (error) {
-    console.error("Error connecting to MongoDB: ", error)
+    console.error("MongoDB connection error:", error)
     throw new Error("Failed to connect to MongoDB")
   }
 }

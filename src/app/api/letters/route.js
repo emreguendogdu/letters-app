@@ -12,8 +12,21 @@ export async function POST(req) {
 
 export async function GET() {
   await connectMongoDB()
-  const letters = await Letter.find().sort({ createdAt: -1 }).lean().exec()
-  return NextResponse.json({ letters })
+  const letters = await Letter.find({})
+    .select("title description letter createdAt") // Only select needed fields
+    .sort({ createdAt: -1 })
+    .lean()
+    // .limit(100)
+    .exec()
+
+  const headers = new Headers({
+    "Cache-Control":
+      process.env.NODE_ENV === "development"
+        ? "no-store, no-cache, must-revalidate, proxy-revalidate"
+        : "public, max-age=31536000, immutable",
+  })
+
+  return NextResponse.json({ letters }, { headers })
 }
 
 export async function DELETE(req) {
@@ -24,11 +37,8 @@ export async function DELETE(req) {
     if (id) {
       await Letter.findByIdAndDelete(id)
     } else {
-      await Letter.bulkWrite([{ deleteMany: { filter: {} } }])
+      await Letter.bulkWrite([{ deleteMany: {} }])
     }
-
-    revalidatePath("/")
-    redirect("/")
   } catch (error) {
     return NextResponse.json({ message: "Error deleting letters", status: 500 })
   }
