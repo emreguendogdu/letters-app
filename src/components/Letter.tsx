@@ -1,7 +1,7 @@
 import Markdown from "markdown-to-jsx"
 import "@/app/styles/markdown-styles.css"
-import { convertDate } from "@/utils/letters"
-import "@/apP/styles/skeleton.css"
+import { convertDate } from "@/utils/utils"
+import "@/app/styles/skeleton.css"
 
 export const SkeletonLetter = () => {
   return (

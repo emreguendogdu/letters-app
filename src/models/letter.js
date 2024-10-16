@@ -11,6 +11,8 @@ const letterSchema = new Schema(
   }
 )
 
+letterSchema.index({ createdAt: -1 }) // Sorting
+
 const Letter = mongoose.models.Letter || mongoose.model("Letter", letterSchema)
 
 export default Letter

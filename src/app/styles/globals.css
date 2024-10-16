@@ -16,6 +16,6 @@
 /* Button */
 @layer components {
   .button {
-    @apply bg-black text-white hover:text-gray-50 hover:border-gray-200 transition-all px-3 rounded w-fit border border-gray-700 py-2 font-bold;
+    @apply bg-black text-white hover:text-gray-50 hover:border-gray-200 transition-all px-4 rounded w-fit border border-gray-700 py-2 font-bold;
   }
 }

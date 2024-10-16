@@ -1,5 +1,6 @@
 import connectMongoDB from "@/libs/mongodb"
 import Letter from "@/models/letter"
+import { redirect } from "next/navigation"
 import { NextResponse } from "next/server"
 
 export async function POST(req) {
@@ -11,19 +12,24 @@ export async function POST(req) {
 
 export async function GET() {
   await connectMongoDB()
-  const letters = await Letter.find().sort({ createdAt: -1 }).exec()
+  const letters = await Letter.find().sort({ createdAt: -1 }).lean().exec()
   return NextResponse.json({ letters })
 }
 
 export async function DELETE(req) {
   const id = await req.nextUrl.searchParams.get("id")
   await connectMongoDB()
-  if (id !== null) {
-    await Letter.findByIdAndDelete(id)
-  } else {
-    await Letter.deleteMany()
-  }
-  return NextResponse.json({ message: "Letter deleted", status: 200 })
-}
 
-// export const dynamic = "force-static"
+  try {
+    if (id) {
+      await Letter.findByIdAndDelete(id)
+    } else {
+      await Letter.bulkWrite([{ deleteMany: { filter: {} } }])
+    }
+
+    revalidatePath("/")
+    redirect("/")
+  } catch (error) {
+    return NextResponse.json({ message: "Error deleting letters", status: 500 })
+  }
+}

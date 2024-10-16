@@ -1,7 +1,7 @@
 import Link from "next/link"
 import RemoveBtn from "./forms/RemoveBtn"
 import { HiPencilAlt } from "react-icons/hi"
-import { convertDate } from "@/utils/letters"
+import { convertDate } from "@/utils/utils"
 
 type LetterProps = {
   title: string
@@ -38,8 +38,8 @@ export const LetterPreview = ({
       </div>
       <div className="flex gap-2">
         <RemoveBtn id={_id} />
-        <Link href={`/editLetter/${_id}`}>
-          <HiPencilAlt size={24} />
+        <Link href={`/editLetter/${_id}`} aria-label="Edit letter">
+          <HiPencilAlt size={24} aria-hidden />
         </Link>
       </div>
     </article>

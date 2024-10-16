@@ -1,11 +1,9 @@
 "use client"
 
-import { fetchLettersPath } from "@/utils/letters"
-import { useRouter } from "next/navigation"
+import { fetchLettersPath } from "@/utils/utils"
 import { useState } from "react"
-import { handleSuccess } from "../handleSuccess"
 import { Form, Input, LetterTextArea } from "./Form"
-import Button from "./Button"
+import { useHandleSuccess } from "@/hooks/useHandleSuccess"
 
 type EditLetterFormProps = {
   id: string
@@ -23,7 +21,7 @@ export default function EditLetterForm({
   const [newTitle, setNewTitle] = useState(title)
   const [newDescription, setNewDescription] = useState(description)
   const [newLetter, setNewLetter] = useState(letter)
-  const router = useRouter()
+  const { handleSuccess } = useHandleSuccess()
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -41,8 +39,7 @@ export default function EditLetterForm({
       })
 
       if (!res.ok) throw new Error("Error updating letter")
-      handleSuccess(router, "Updated letter successfully")
-      router.push(`/letters/${id}`)
+      handleSuccess(`/letters/${id}`, "Letter updated successfully")
     } catch (err) {
       console.log("Error updating letter: ", err)
     }
@@ -65,7 +62,7 @@ export default function EditLetterForm({
         value={newLetter}
         onChange={(e) => setNewLetter(e.target.value)}
       />
-      <Button>Update Letter</Button>
+      <button className="button">Update Letter</button>
     </Form>
   )
 }

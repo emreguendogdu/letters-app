@@ -1,30 +1,39 @@
-"use client"
 import { HiOutlineTrash } from "react-icons/hi"
 import { useRouter } from "next/navigation"
-import { handleSuccess } from "../handleSuccess"
-import { fetchLettersPath } from "@/utils/letters"
-import Button from "./Button"
+import { fetchLettersPath } from "@/utils/utils"
 
-export default function RemoveBtn({ id }: { id: string }) {
+export default function RemoveBtn({
+  id,
+  removeAll = false,
+}: {
+  id: string
+  removeAll?: boolean
+}) {
   const router = useRouter()
+  const actionText = removeAll ? "all letters" : "this letter"
+
+  const removePath = removeAll
+    ? fetchLettersPath
+    : `${fetchLettersPath}?id=${id}`
+
   const removeLetter = async () => {
-    const confirmed = confirm("Are you sure you want to delete this letter?")
+    const confirmed = confirm(`Are you sure you want to delete ${actionText}?`)
 
     if (confirmed) {
-      const res = await fetch(`${fetchLettersPath}?id=${id}`, {
+      const res = await fetch(removePath, {
         method: "DELETE",
       })
 
-      if (!res.ok) return console.error("Error deleting letter on RemoveBtn")
-      if (res.ok) return handleSuccess(router, "Letter deleted")
+      if (!res.ok) return console.error(`Error while deleting`)
     }
   }
   return (
-    <Button
-      onClick={removeLetter}
-      className="!bg-white !text-red-500 !px-0 !py-0 !border-0"
+    <button
+      onClick={() => removeLetter()}
+      className="button !bg-white !text-red-500 !px-0 !py-0 !border-0"
+      aria-label={`Remove ${actionText}`}
     >
-      <HiOutlineTrash size={24} />
-    </Button>
+      <HiOutlineTrash size={24} aria-hidden />
+    </button>
   )
 }

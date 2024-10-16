@@ -1,16 +1,15 @@
 "use client"
-import Button from "@/components/forms/Button"
+
 import { Form, Input, LetterTextArea } from "@/components/forms/Form"
-import { handleSuccess } from "@/components/handleSuccess"
-import { fetchLettersPath } from "@/utils/letters"
-import { useRouter } from "next/navigation"
+import { useHandleSuccess } from "@/hooks/useHandleSuccess"
+import { fetchLettersPath } from "@/utils/utils"
 import { useState } from "react"
 
 export default function AddLetter() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [letter, setLetter] = useState("")
-  const router = useRouter()
+  const { handleSuccess } = useHandleSuccess()
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -27,8 +26,7 @@ export default function AddLetter() {
       if (!res.ok) return console.log("Error adding letter on addLetter/page")
 
       if (res.ok) {
-        handleSuccess(router, "Added letter successfully")
-        router.push("/")
+        handleSuccess("/", "Added letter successfully")
       }
     } catch (err) {
       console.log("Error adding letter: ", err)
@@ -53,7 +51,7 @@ export default function AddLetter() {
         onChange={(e) => setLetter(e.target.value)}
       />
       {/* <label htmlFor="image">Add image</label> */}
-      <Button>Add Letter</Button>
+      <button className="button">Add Letter</button>
     </Form>
   )
 }
