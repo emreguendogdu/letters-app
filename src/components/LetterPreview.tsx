@@ -19,7 +19,7 @@ export const LetterPreview = ({
   createdAt = convertDate(createdAt)
 
   return (
-    <article className="pr-4 my-10 flex flex-col justify-between gap-2 items-start w-1/3 max-[768px]:p-0 max-[768px]:w-full max-[768px]:my-5">
+    <article className="pr-4 mb-24 flex flex-col max-h-fit justify-between gap-2 items-start w-1/3 max-[768px]:p-0 max-[768px]:w-full max-[768px]:mb-5">
       <div className="flex flex-col gap-2">
         <div>
           <h2 className="font-extrabold text-2xl  bg-gradient-to-b from-black to-blue-300 bg-clip-text text-transparent">
@@ -48,7 +48,7 @@ export const LetterPreview = ({
 
 export const LetterSkeleton = () => {
   return (
-    <article className="pr-4 my-10 flex flex-col justify-between gap-2 items-start w-1/3 max-[768px]:p-0 max-[768px]:w-full max-[768px]:my-5">
+    <article className="pr-4 mb-10 flex flex-col justify-between gap-2 items-start w-1/3 max-[768px]:p-0 max-[768px]:w-full max-[768px]:mb-5">
       <div className="flex flex-col gap-2">
         <div>
           <h2 className="font-extrabold text-2xl  bg-gradient-to-b from-black to-blue-300 bg-clip-text text-transparent skeleton skeleton-title">

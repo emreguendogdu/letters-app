@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white text-black font-helveticaNow">
-        <div className="mx-auto px-14 py-3 max-[768px]:px-4">
           <Navbar />
-          <div className="mt-2">{children}</div>
-        </div>
+        <main className="px-14 mt-20 mb-10 md:mt-24 md:mb-12 max-[768px]:px-4">
+          {children}
+        </main>
         <Footer />
         <Toaster />
       </body>

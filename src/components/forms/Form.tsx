@@ -10,7 +10,7 @@ type InputProps = {
 
 export function Form({ children, onSubmit }: any) {
   return (
-    <form className="mt-16 md:mt-20 flex flex-col gap-3" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-3" onSubmit={onSubmit}>
       {children}
     </form>
   )
