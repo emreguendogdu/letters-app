@@ -1,3 +1,4 @@
+import Link from "next/link"
 import HandlePreview from "../MarkdownPreview"
 
 type InputProps = {
@@ -37,7 +38,17 @@ export function Input({ name, value, onChange }: InputProps) {
 export function LetterTextArea({ name, value, onChange }: InputProps) {
   return (
     <>
-      <label htmlFor={name}>Letter</label>
+      <label htmlFor={name}>
+        Letter (You can use{" "}
+        <Link
+          href="https://markdown-it.github.io/"
+          target="_blank"
+          className="font-semibold hover:font-bold transition-all"
+        >
+          markdown
+        </Link>
+        )
+      </label>
       <div className="flex *:flex-1 gap-4 max-[768px]:flex-col">
         <textarea
           id={name}
