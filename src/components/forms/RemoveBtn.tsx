@@ -27,7 +27,7 @@ export default function RemoveBtn({
   return (
     <button
       onClick={() => removeLetter()}
-      className="button !bg-white !px-0 !py-0 !border-0"
+      className="button !bg-white !px-0 !py-0 !border-0 !text-black"
       aria-label={`Remove ${actionText}`}
     >
       <DeleteIcon />
