@@ -1,7 +1,5 @@
 import mongoose from "mongoose"
 
-const MONGODB_URI = process.env.MONGO_URI
-
 // Global connection object
 const connection = {
   isConnected: false,
@@ -17,7 +15,7 @@ const connectMongoDB = async () => {
 
   // If connecting, wait for the existing promise
   if (connection.promise) {
-    connection.conn = await connection.promise
+    connection.conn = connection.promise
     return connection.conn
   }
 

@@ -1,5 +1,5 @@
-import { HiOutlineTrash } from "react-icons/hi"
 import { useRouter } from "next/navigation"
+import { DeleteIcon } from "@/components/icons"
 
 export default function RemoveBtn({
   id,
@@ -11,9 +11,7 @@ export default function RemoveBtn({
   const router = useRouter()
   const actionText = removeAll ? "all letters" : "this letter"
 
-  const removePath = removeAll
-    ? "/api/letters"
-    : `/api/letters?id=${id}`
+  const removePath = removeAll ? "/api/letters" : `/api/letters?id=${id}`
 
   const removeLetter = async () => {
     const confirmed = confirm(`Are you sure you want to delete ${actionText}?`)
@@ -29,10 +27,10 @@ export default function RemoveBtn({
   return (
     <button
       onClick={() => removeLetter()}
-      className="button !bg-white !text-red-500 !px-0 !py-0 !border-0"
+      className="button !bg-white !px-0 !py-0 !border-0"
       aria-label={`Remove ${actionText}`}
     >
-      <HiOutlineTrash size={24} aria-hidden />
+      <DeleteIcon />
     </button>
   )
 }
