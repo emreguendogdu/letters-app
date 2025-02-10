@@ -40,8 +40,8 @@ export default function Letter({ letter }: any) {
         <div id="links"></div>
         <div className="mb-4 font-light flex gap-2">
           <time>{convertDate(letter.createdAt)}</time>
-          <span className={`border-l border-black`} />
-          <span>Osman Gundogdu</span>
+          {/* <span className={`border-l border-black`} />
+          <span>Author</span> */}
         </div>
         <div>
           <h1 className="text-4xl inline-block font-extrabold capitalize after:border after:border-cyan-800 after:block after:mt-2">
