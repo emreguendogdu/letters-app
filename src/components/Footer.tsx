@@ -4,13 +4,13 @@ export default function Footer() {
       <p className="text-xs">
         <a
           className="font-bold"
-          href="https://osmangund.tech"
+          href="https://linkedin.com/in/emregnd"
           target="_blank"
           rel="noreferrer"
         >
-          osmangund®{" "}
+          emregnd{" "}
         </a>
-        2024. All rights reserved.
+        - © 2024
       </p>
     </footer>
   )
