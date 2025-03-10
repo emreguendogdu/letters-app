@@ -1,23 +1,38 @@
+"use client"
+
 import Markdown from "markdown-to-jsx"
 import "@/app/styles/markdown-styles.css"
 import { convertDate } from "@/utils/utils"
 import "@/app/styles/skeleton.css"
+import { ChevronLeft } from "./icons"
+import { useRouter } from "next/navigation"
 
 export default function Letter({ letter }: any) {
+  const router = useRouter()
+
   return (
-    <article className="mb-4 max-w-3xl container mx-auto break-words min-h-screen">
-      <div className="mb-6 flex gap-2 flex-col">
-        <div id="links"></div>
-        <div className="mb-4 font-light flex gap-2">
-          <time>{convertDate(letter.createdAt)}</time>
-        </div>
-        <div>
-          <h1 className="text-4xl inline-block font-extrabold capitalize after:border after:border-cyan-800 after:block after:mt-2">
-            {letter.title}
-          </h1>
-        </div>
+    <article className="relative w-full mb-4 max-w-3xl container break-words min-h-screen">
+      <div
+        className="absolute top-0 left-0 text-3xl cursor-pointer"
+        onClick={() => {
+          router.back()
+        }}
+      >
+        <ChevronLeft />
       </div>
-      <Markdown className="markdown text-xl">{letter.content}</Markdown>
+      <div className="w-full flex flex-col items-center">
+        <div className="mb-6 flex gap-2 flex-col">
+          <div className="mb-4 font-light flex gap-2">
+            <time>{convertDate(letter.createdAt)}</time>
+          </div>
+          <div>
+            <h1 className="text-4xl inline-block font-extrabold capitalize after:border after:border-cyan-800 after:block after:mt-2">
+              {letter.title}
+            </h1>
+          </div>
+        </div>
+        <Markdown className="markdown text-xl">{letter.content}</Markdown>
+      </div>
     </article>
   )
 }

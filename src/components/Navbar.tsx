@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import AuthPopUp from "@/components/AuthPopUp"
 import { signOut, useSession } from "next-auth/react"
 import Image from "next/image"
@@ -25,8 +25,6 @@ export function AccountIcon(props: any) {
 }
 
 const getButtonConfig = (pathname: string, session: any) => {
-  if (!session) return
-
   if (pathname === "/") return { href: "/addLetter", text: "Create New Letter" }
   if (pathname.startsWith("/letters/"))
     return { href: `/editLetter/${pathname.split("/")[2]}`, text: "Edit" }
@@ -69,20 +67,16 @@ export default function Nav() {
           Letters App
         </Link>
         <div className="flex gap-4">
-          {button && (
+          {button && session ? (
             <Link className="button" href={button.href}>
               {button.text}
             </Link>
-          )}
-          {!session ? (
-            <button
-              className="button flex gap-2 items-center"
-              onClick={togglePopUp}
-            >
-              <AccountIcon className="inline-block" />
-              <span>Register</span>
-            </button>
           ) : (
+            <button className="button" onClick={() => setAuthPopUpOpen(true)}>
+              {button.text}
+            </button>
+          )}
+          {session && pathname === "/" && (
             <button className="button" onClick={() => signOut()}>
               Sign Out
             </button>
