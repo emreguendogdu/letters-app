@@ -9,6 +9,7 @@ export default function Footer() {
           alt="Van Gogh Starry Night background"
           className="object-cover opacity-20 rotate-180"
           fill
+          priority
         />
       </div>
       <p className="text-xs">

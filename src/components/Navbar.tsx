@@ -58,6 +58,7 @@ export default function Nav() {
             alt="Van Gogh Starry Night background"
             className="object-cover opacity-50"
             fill
+            priority
           />
         </div>
         <Link

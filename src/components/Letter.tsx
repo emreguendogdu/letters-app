@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation"
 export default function Letter({ letter }: any) {
   const router = useRouter()
 
+  if (!letter) return router.replace("/")
+
   return (
     <article className="relative w-full mb-4 max-w-3xl container break-words min-h-screen">
       <div
