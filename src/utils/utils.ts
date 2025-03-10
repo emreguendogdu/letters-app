@@ -6,13 +6,7 @@ export const convertDate = (date: any) => {
   }))
 }
 
-// const fetchWithTiming = async () => {
-//   const start = performance.now()
-//   const data = await fetchLetters()
-//   const end = performance.now()
-//   console.log(`Fetch took ${end - start}ms`)
-//   return data
-// }
+
 
 export const fetcher = (...args: [string, RequestInit?]) =>
   fetch(...args).then((res) => res.json())

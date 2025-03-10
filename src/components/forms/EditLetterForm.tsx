@@ -2,25 +2,25 @@
 
 import { useState } from "react"
 import { Form, Input, LetterTextArea } from "./Form"
-import { useHandleSuccess } from "@/hooks/useHandleSuccess"
+import { useNotification } from "@/hooks/useNotification"
 
 type EditLetterFormProps = {
   id: string
   title: string
   description: string
-  letter: string
+  content: string
 }
 
 export default function EditLetterForm({
   id,
   title,
   description,
-  letter,
+  content,
 }: EditLetterFormProps) {
-  const [newTitle, setNewTitle] = useState(title)
-  const [newDescription, setNewDescription] = useState(description)
-  const [newLetter, setNewLetter] = useState(letter)
-  const { handleSuccess } = useHandleSuccess()
+  const [updatedTitle, setUpdatedTitle] = useState(title)
+  const [updatedDescription, setUpdatedDescription] = useState(description)
+  const [updatedContent, setUpdatedContent] = useState(content)
+  const notification = useNotification()
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
@@ -31,35 +31,42 @@ export default function EditLetterForm({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: newTitle,
-          description: newDescription,
-          letter: newLetter,
+          updatedTitle,
+          updatedDescription,
+          updatedContent,
         }),
       })
 
-      if (!res.ok) throw new Error("Error updating letter")
-      handleSuccess(`/letters/${id}`, "Letter updated successfully")
-    } catch (err) {
-      console.log("Error updating letter: ", err)
+      if (res.ok) {
+        return notification(
+          "success",
+          "Letter updated successfully",
+          `/letters/${id}`
+        )
+      } else {
+        return notification("error", "Letter couldn't update.", `/`)
+      }
+    } catch (err: any) {
+      throw new Error(err)
     }
   }
 
   return (
-    <Form onSubmit={handleSubmit} letter={newLetter}>
+    <Form onSubmit={handleSubmit}>
       <Input
         name="title"
-        value={newTitle}
-        onChange={(e) => setNewTitle(e.target.value)}
+        value={updatedTitle}
+        onChange={(e) => setUpdatedTitle(e.target.value)}
       />
       <Input
         name="description"
-        value={newDescription}
-        onChange={(e) => setNewDescription(e.target.value)}
+        value={updatedDescription}
+        onChange={(e) => setUpdatedDescription(e.target.value)}
       />
       <LetterTextArea
-        name="letter"
-        value={newLetter}
-        onChange={(e) => setNewLetter(e.target.value)}
+        name="content"
+        value={updatedContent}
+        onChange={(e) => setUpdatedContent(e.target.value)}
       />
       <button className="button">Update Letter</button>
     </Form>

@@ -2,40 +2,94 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import AuthPopUp from "@/components/AuthPopUp"
+import { signOut, useSession } from "next-auth/react"
+import Image from "next/image"
 
-const Nav = () => {
-  const pathname = usePathname()
-  const id = pathname.split("/")[2]
-  const [button, setButton] = useState({
-    href: "",
-    text: "",
-  })
-
-  useEffect(() => {
-    if (pathname === "/") {
-      setButton({ href: "/addLetter", text: "New Letter" })
-    } else if (pathname.match(/\/letters\/+/)) {
-      setButton({ href: `/editLetter/${id}`, text: "Edit" })
-    } else if (pathname.match(/\/editLetter+/)) {
-      setButton({ href: `/letters/${id}`, text: "Back to Letter" })
-    } else if (pathname === "/addLetter") {
-      setButton({ href: "/", text: "Back" })
-    } else {
-      setButton({ href: "/addLetter", text: "New Letter" })
-    }
-  }, [pathname, id])
-
+export function AccountIcon(props: any) {
   return (
-    <nav className="fixed top-0 left-0 right-0 px-8 py-3 flex justify-between items-center max-[768px]:px-3 bg-nav-img text-white z-10">
-      <Link href={"/"} className="font-bold font-mono hover:tracking-wider hover:brightness-110 transition-all">
-        Letters App
-      </Link>
-      <Link className="button" href={button.href}>
-        {button.text}
-      </Link>
-    </nav>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-2.8q0-.85.438-1.562T5.6 14.55q1.55-.775 3.15-1.162T12 13t3.25.388t3.15 1.162q.725.375 1.163 1.088T20 17.2V20z"
+      ></path>
+    </svg>
   )
 }
 
-export default Nav
+const getButtonConfig = (pathname: string, session: any) => {
+  if (!session) return
+
+  if (pathname === "/") return { href: "/addLetter", text: "Create New Letter" }
+  if (pathname.startsWith("/letters/"))
+    return { href: `/editLetter/${pathname.split("/")[2]}`, text: "Edit" }
+  if (pathname.startsWith("/editLetter"))
+    return {
+      href: `/letters/${pathname.split("/")[2]}`,
+      text: "Back to Letter",
+    }
+  if (pathname === "/addLetter") return { href: "/", text: "Back" }
+  return { href: "/addLetter", text: "Create New Letter" }
+}
+
+export default function Nav() {
+  const pathname = usePathname()
+  const { data: session } = useSession()
+
+  const button = useMemo(
+    () => getButtonConfig(pathname, session),
+    [pathname, session]
+  )
+
+  const [authPopUpOpen, setAuthPopUpOpen] = useState(false)
+  const togglePopUp = () => setAuthPopUpOpen((prev) => !prev)
+
+  return (
+    <>
+      <nav className="fixed top-0 left-0 right-0 px-8 py-3 flex justify-between items-center max-[768px]:px-3 text-white z-10 bg-black">
+        <div className="absolute inset-0 w-full h-full -z-10">
+          <Image
+            src="/starrynight.webp"
+            alt="Van Gogh Starry Night background"
+            className="object-cover opacity-50"
+            fill
+          />
+        </div>
+        <Link
+          href={"/"}
+          className="font-bold font-mono hover:tracking-wider hover:brightness-110 transition-all bg-black px-4 py-2"
+        >
+          Letters App
+        </Link>
+        <div className="flex gap-4">
+          {button && (
+            <Link className="button" href={button.href}>
+              {button.text}
+            </Link>
+          )}
+          {!session ? (
+            <button
+              className="button flex gap-2 items-center"
+              onClick={togglePopUp}
+            >
+              <AccountIcon className="inline-block" />
+              <span>Register</span>
+            </button>
+          ) : (
+            <button className="button" onClick={() => signOut()}>
+              Sign Out
+            </button>
+          )}
+        </div>
+      </nav>
+      {authPopUpOpen && <AuthPopUp setPopUpOpen={setAuthPopUpOpen} />}
+    </>
+  )
+}

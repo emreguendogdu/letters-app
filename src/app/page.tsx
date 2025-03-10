@@ -3,9 +3,11 @@
 import useLetters from "@/hooks/useLetters"
 import { LetterPreview, LetterSkeleton } from "@/components/LetterPreview"
 import "@/app/styles/skeleton.css"
+import useSessionId from "@/hooks/useSessionId"
 
 export default function Home() {
   let { letters, isError, isLoading } = useLetters()
+  const sessionId = useSessionId()
 
   if (isError) return <div>Error loading letters</div>
   if (letters?.length < 1) return <div>No letters yet. Create one now!</div>
@@ -18,10 +20,8 @@ export default function Home() {
             return (
               <LetterPreview
                 key={letter._id}
-                title={letter.title}
-                description={letter.description}
-                createdAt={letter.createdAt}
-                _id={letter._id}
+                letter={letter}
+                sessionId={sessionId}
               />
             )
           })}

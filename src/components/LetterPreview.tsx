@@ -4,19 +4,18 @@ import { EditIcon } from "@/components/icons"
 import { convertDate } from "@/utils/utils"
 
 type LetterProps = {
-  title: string
-  description: string
-  _id: string
-  createdAt: string
+  letter: {
+    _id: string
+    authorId: string
+    title: string
+    description: string
+    createdAt: string
+  }
+  sessionId: any
 }
 
-export const LetterPreview = ({
-  title,
-  _id,
-  createdAt,
-  description,
-}: LetterProps) => {
-  createdAt = convertDate(createdAt)
+export const LetterPreview = ({ letter, sessionId }: LetterProps) => {
+  const { _id, authorId, title, description, createdAt } = letter
 
   return (
     <article className="pr-4 mb-24 flex flex-col max-h-fit justify-between gap-2 items-start w-1/3 max-[768px]:p-0 max-[768px]:w-full max-[768px]:mb-5">
@@ -33,15 +32,17 @@ export const LetterPreview = ({
           <Link href={`/letters/${_id}`} className="italic underline">
             Read more...
           </Link>
-          <p className="text-xs mt-2">{createdAt}</p>
+          <p className="text-xs mt-2">{convertDate(createdAt)}</p>
         </div>
       </div>
-      <div className="flex gap-2">
-        <RemoveBtn id={_id} />
-        <Link href={`/editLetter/${_id}`} aria-label="Edit letter">
-          <EditIcon aria-hidden />
-        </Link>
-      </div>
+      {sessionId && sessionId === authorId && (
+        <div className="flex gap-2">
+          <RemoveBtn id={_id} />
+          <Link href={`/editLetter/${_id}`} aria-label="Edit letter">
+            <EditIcon aria-hidden />
+          </Link>
+        </div>
+      )}
     </article>
   )
 }
@@ -64,10 +65,6 @@ export const LetterSkeleton = () => {
         <div>
           <p className="max-w-20 mt-6 skeleton skeleton-text" />
           <p className="max-w-16 mt-2 skeleton skeleton-text" />
-          <div className="flex gap-2">
-            <p className="max-w-6 min-h-6 mt-2 skeleton skeleton-text" />
-            <p className="max-w-6 min-h-6 mt-2 skeleton skeleton-text" />
-          </div>
         </div>
       </div>
     </article>

@@ -1,17 +1,22 @@
 "use client"
 
 import { Form, Input, LetterTextArea } from "@/components/forms/Form"
-import { useHandleSuccess } from "@/hooks/useHandleSuccess"
+import { useNotification } from "@/hooks/useNotification"
 import { useState } from "react"
+import useSessionId from "@/hooks/useSessionId"
 
 export default function AddLetter() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  const [letter, setLetter] = useState("")
-  const { handleSuccess } = useHandleSuccess()
+  const [content, setContent] = useState("")
+  const notification = useNotification()
+
+  const authorId = useSessionId()
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
+    if (!authorId) return notification("error", "You must log in.")
+
     try {
       const res = await fetch("/api/letters", {
         method: "POST",
@@ -19,21 +24,21 @@ export default function AddLetter() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, letter, description }),
+        body: JSON.stringify({ title, content, description, authorId }),
       })
 
-      if (!res.ok) return console.log("Error adding letter on addLetter/page")
-
       if (res.ok) {
-        handleSuccess("/", "Added letter successfully")
+        return notification("success", "Letter added succesfully!", "/")
+      } else {
+        throw new Error("Error adding letter")
       }
-    } catch (err) {
-      console.log("Error adding letter: ", err)
+    } catch (err: any) {
+      throw new Error("Error adding new letter: ", err)
     }
   }
 
   return (
-    <Form onSubmit={handleSubmit} letter={letter}>
+    <Form onSubmit={handleSubmit}>
       <Input
         name="title"
         value={title}
@@ -45,11 +50,10 @@ export default function AddLetter() {
         onChange={(e) => setDescription(e.target.value)}
       />
       <LetterTextArea
-        name="letter"
-        value={letter}
-        onChange={(e) => setLetter(e.target.value)}
+        name="content"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
       />
-      {/* <label htmlFor="image">Add image</label> */}
       <button className="button">Add Letter</button>
     </Form>
   )

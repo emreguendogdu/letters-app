@@ -3,6 +3,25 @@ import "@/app/styles/markdown-styles.css"
 import { convertDate } from "@/utils/utils"
 import "@/app/styles/skeleton.css"
 
+export default function Letter({ letter }: any) {
+  return (
+    <article className="mb-4 max-w-3xl container mx-auto break-words min-h-screen">
+      <div className="mb-6 flex gap-2 flex-col">
+        <div id="links"></div>
+        <div className="mb-4 font-light flex gap-2">
+          <time>{convertDate(letter.createdAt)}</time>
+        </div>
+        <div>
+          <h1 className="text-4xl inline-block font-extrabold capitalize after:border after:border-cyan-800 after:block after:mt-2">
+            {letter.title}
+          </h1>
+        </div>
+      </div>
+      <Markdown className="markdown text-xl">{letter.content}</Markdown>
+    </article>
+  )
+}
+
 export const SkeletonLetter = () => {
   return (
     <article className="mb-4 max-w-3xl min-h-screen container mx-auto break-words">
@@ -29,27 +48,6 @@ export const SkeletonLetter = () => {
       <div className="skeleton skeleton-text mb-8" />
       <div className="skeleton skeleton-text" />
       <div className="skeleton skeleton-text" />
-    </article>
-  )
-}
-
-export default function Letter({ letter }: any) {
-  return (
-    <article className="mb-4 max-w-3xl container mx-auto break-words min-h-screen">
-      <div className="mb-6 flex gap-2 flex-col">
-        <div id="links"></div>
-        <div className="mb-4 font-light flex gap-2">
-          <time>{convertDate(letter.createdAt)}</time>
-          {/* <span className={`border-l border-black`} />
-          <span>Author</span> */}
-        </div>
-        <div>
-          <h1 className="text-4xl inline-block font-extrabold capitalize after:border after:border-cyan-800 after:block after:mt-2">
-            {letter.title}
-          </h1>
-        </div>
-      </div>
-      <Markdown className="markdown text-xl">{letter.letter}</Markdown>
     </article>
   )
 }

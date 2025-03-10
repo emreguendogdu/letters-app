@@ -11,7 +11,12 @@ const letterSchema = new Schema(
       type: String,
       required: true,
     },
-    letter: {
+    content: {
+      type: String,
+      maxLength: 2000,
+      required: true,
+    },
+    authorId: {
       type: String,
       required: true,
     },
