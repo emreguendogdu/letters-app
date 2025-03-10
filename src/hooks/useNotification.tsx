@@ -3,12 +3,12 @@ import toast from "react-hot-toast"
 
 const notificationStyle = {
   style: {
-    border: "1px solid mediumpurple",
+    border: "1px solid #84B2E5",
     padding: "16px",
     color: "black",
   },
   iconTheme: {
-    primary: "mediumpurple",
+    primary: "#84B2E5",
     secondary: "#FFFAEE",
   },
 }
