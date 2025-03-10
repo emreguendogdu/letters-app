@@ -1,24 +1,21 @@
 import CredentialsProvider from "next-auth/providers/credentials"
-import NextAuth from "next-auth"
-
-import User from "./models/user"
+import User from "@/models/user"
 import bcrypt from "bcrypt"
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
+export const authOptions = {
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+  },
   providers: [
     CredentialsProvider({
+      name: "credentials",
       credentials: {
-        username: {},
         email: {},
         password: {},
       },
+
       async authorize(credentials) {
         if (credentials === null) return null
 
@@ -48,14 +45,25 @@ export const {
     }),
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
-      if (user) {
-        token.uid = user
-      }
+    async signIn({ account, profile }) {
+      return true
+    },
 
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.email = user.email
+      }
       return token
     },
-    session: async ({ session, token }) => {
+    async session({ session, token }) {
+      if (token) {
+        session.user = {
+          email: token.email,
+          id: token.id,
+        }
+      }
+      return session
     },
   },
-})
+}
