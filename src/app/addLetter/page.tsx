@@ -24,7 +24,7 @@ export default function AddLetter() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, content, description, authorId }),
+        body: JSON.stringify({ title, description, content, authorId }),
       })
 
       if (res.ok) {

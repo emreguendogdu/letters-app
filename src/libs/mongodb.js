@@ -20,19 +20,8 @@ const connectMongoDB = async () => {
   }
 
   try {
-    // Configure connection options for better performance
-    const opts = {
-      bufferCommands: false,
-      maxPoolSize: 10,
-      minPoolSize: 5,
-      socketTimeoutMS: 45000,
-      serverSelectionTimeoutMS: 5000,
-      family: 4, // Use IPv4, skip IPv6
-    }
-
-    // Create new connection
-    connection.promise = mongoose.connect(process.env.MONGO_URI, opts)
-    connection.conn = await connection.promise
+    connection.promise = mongoose.connect(process.env.MONGO_URI)
+    connection.conn = connection.promise
     connection.isConnected = connection.conn.connections[0].readyState === 1
 
     return connection.conn

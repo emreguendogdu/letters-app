@@ -5,16 +5,16 @@ import MarkdownItAttrs from "markdown-it-attrs"
 import { useEffect } from "react"
 import "@/app/styles/markdown-styles.css"
 
-export default function MarkdownPreview({ letter }: { letter: string }) {
+export default function MarkdownPreview({ content }: { content: string }) {
   useEffect(() => {
     const md = new MarkdownIt()
     md.use(MarkdownItAttrs)
     md.use(MarkdownItTaskLists)
     const preview = document.getElementById("preview")
     if (preview) {
-      preview.innerHTML = md.render(letter)
+      preview.innerHTML = md.render(content)
     }
-  }, [letter])
+  }, [content])
 
   return (
     <div>

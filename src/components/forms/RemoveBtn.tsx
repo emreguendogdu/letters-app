@@ -21,7 +21,8 @@ export default function RemoveBtn({ id }: { id: string; removeAll?: boolean }) {
 
       return notification(
         "success",
-        "Letter deleted. (It may take a couple of seconds)"
+        "Letter deleted. (It may take a couple of seconds)",
+        "/"
       )
     }
   }

@@ -22,15 +22,18 @@ export default function Letter({ letter }: any) {
       >
         <ChevronLeft />
       </div>
-      <div className="w-full flex flex-col items-center">
+      <div className="w-1/2 mx-auto">
         <div className="mb-6 flex gap-2 flex-col">
-          <div className="mb-4 font-light flex gap-2">
-            <time>{convertDate(letter.createdAt)}</time>
-          </div>
+          <time className="text-sm font-light mb-2">
+            {convertDate(letter.createdAt)}
+          </time>
           <div>
-            <h1 className="text-4xl inline-block font-extrabold capitalize after:border after:border-cyan-800 after:block after:mt-2">
-              {letter.title}
-            </h1>
+            <div className="flex flex-col gap-2 border-b">
+              <h1 className="text-4xl inline-block font-extrabold capitalize">
+                {letter.title}
+              </h1>
+              <p className="font-light text-lg">{letter.description}</p>
+            </div>
           </div>
         </div>
         <Markdown className="markdown text-xl">{letter.content}</Markdown>

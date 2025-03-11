@@ -27,7 +27,7 @@ export function useNotification() {
 
     setTimeout(() => {
       route ? router.push(route) : router.refresh()
-    }, 400)
+    }, 500)
   }
 
   return notification

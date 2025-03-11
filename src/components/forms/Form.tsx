@@ -58,7 +58,7 @@ export function LetterTextArea({ name, value, onChange }: InputProps) {
           className="border border-slate-500 px-4 py-2 min-h-48 text-start justify-start"
           required
         />
-        <HandlePreview letter={value} />
+        <HandlePreview content={value} />
       </div>
     </>
   )
