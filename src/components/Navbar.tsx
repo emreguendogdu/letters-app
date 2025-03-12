@@ -46,8 +46,9 @@ export default function Nav() {
     [pathname, session]
   )
 
+  console.log(session)
+
   const [authPopUpOpen, setAuthPopUpOpen] = useState(false)
-  const togglePopUp = () => setAuthPopUpOpen((prev) => !prev)
 
   return (
     <>

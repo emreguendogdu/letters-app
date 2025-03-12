@@ -86,14 +86,6 @@ export default function AuthPopUp({ setPopUpOpen }) {
         onClick={() => setPopUpOpen(false)}
       />
       <div className="relative bg-neutral-800 px-32 py-16 rounded-3xl z-[100]">
-        {/* <button
-          className="absolute top-2 right-4 text-lg text-white/60 border-[0.5px] border-white/20 rounded-full px-2"
-          onClick={() => {
-            setPopUpOpen(false)
-          }}
-        >
-          x
-        </button> */}
         <h2 className="font-bold font-mono text-white text-center mb-4 text-2xl">
           {isRegister ? "register" : "login"}
         </h2>

@@ -7,9 +7,7 @@ import "@/app/styles/markdown-styles.css"
 
 export default function MarkdownPreview({ content }: { content: string }) {
   useEffect(() => {
-    const md = new MarkdownIt()
-    md.use(MarkdownItAttrs)
-    md.use(MarkdownItTaskLists)
+    const md = new MarkdownIt().use(MarkdownItAttrs).use(MarkdownItTaskLists)
     const preview = document.getElementById("preview")
     if (preview) {
       preview.innerHTML = md.render(content)
