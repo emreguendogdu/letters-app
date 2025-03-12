@@ -1,34 +1,26 @@
 import mongoose from "mongoose"
 
-// Global connection object
-const connection = {
-  isConnected: false,
-  conn: null,
-  promise: null,
+const MONGO_URI = process.env.MONGO_URI
+
+let cached = global.mongoose
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null }
 }
 
 const connectMongoDB = async () => {
-  // If already connected, reuse the connection
-  if (connection.isConnected) {
-    return connection.conn
+  if (cached.conn) {
+    return cached.conn
   }
 
-  // If connecting, wait for the existing promise
-  if (connection.promise) {
-    connection.conn = connection.promise
-    return connection.conn
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGO_URI).then((mongoose) => {
+      return mongoose
+    })
   }
 
-  try {
-    connection.promise = mongoose.connect(process.env.MONGO_URI)
-    connection.conn = connection.promise
-    connection.isConnected = connection.conn.connections[0].readyState === 1
-
-    return connection.conn
-  } catch (error) {
-    console.error("MongoDB connection error:", error)
-    throw new Error("Failed to connect to MongoDB")
-  }
+  cached.conn = await cached.promise
+  return cached.conn
 }
 
 export default connectMongoDB
