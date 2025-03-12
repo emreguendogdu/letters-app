@@ -25,6 +25,8 @@ export function useNotification() {
       throw new Error("Toast notification type should be success or error.")
     }
 
+    if (route === "none") return
+
     setTimeout(() => {
       route ? router.push(route) : router.refresh()
     }, 500)

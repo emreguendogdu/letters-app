@@ -72,7 +72,7 @@ export default function AuthPopUp({ setPopUpOpen }) {
         setPopUpOpen(false)
         notification("success", "Successfully logged in!")
       } else {
-        notification("error", "Email or password is wrong.")
+        notification("error", "Email or password is wrong.", "none")
       }
     } catch (err) {
       throw new Error(err)
